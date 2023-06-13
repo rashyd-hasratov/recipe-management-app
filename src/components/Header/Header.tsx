@@ -1,16 +1,23 @@
 import styles from './Header.module.scss';
 import commonStyles from '../../styles/Common.module.scss';
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={commonStyles.container}>
         <div className={styles.header_content}>
-          <div className={styles.logo}>
+          <Link
+            to='/'
+            className={styles.logo}
+          >
             Recipes
-          </div>
+          </Link>
 
-          <button className={styles.saved_button} />
+          <Link
+            to='saved'
+            className={styles.saved_button}
+          />
         </div>
       </div>
     </header>

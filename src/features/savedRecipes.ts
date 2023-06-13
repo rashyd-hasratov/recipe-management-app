@@ -1,6 +1,11 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { Recipe } from "../types/Recipe"
+import { actions as favoriteRecipesActions } from './favoriteRecipes';
+
+const savedRecipesFromLocalStorage = JSON.parse(
+  localStorage.getItem('savedRecipes') || '[]'
+);
 
 type RecipeUpdatePayload = {
   recipeId: string;
@@ -9,7 +14,7 @@ type RecipeUpdatePayload = {
 
 const savedRecipesSlice = createSlice({
   name: 'savedRecipes',
-  initialState: [] as Recipe[],
+  initialState: savedRecipesFromLocalStorage as Recipe[],
   reducers: {
     add: (recipes, action: PayloadAction<Recipe>) => {
       recipes.push(action.payload);
@@ -35,6 +40,16 @@ const savedRecipesSlice = createSlice({
 
       return newRecipes;
     }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(favoriteRecipesActions.add, (recipes, action) => {
+      if (!recipes.some(({ id }) => id === action.payload.id)) {
+        recipes.push(action.payload);
+        localStorage.setItem('savedRecipes', JSON.stringify(recipes));
+      }
+      
+      return recipes;
+    });
   },
 });
 

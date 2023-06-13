@@ -1,20 +1,30 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { actions as savedRecipesActions } from '../../features/savedRecipes';
 import { actions as favoriteRecipesActions } from '../../features/favoriteRecipes';
-import { Recipe } from "../../types/Recipe";
 
-import styles from './RecipeCard.module.scss';
+import styles from './RecipePage.module.scss';
 
-type RecipeCardProps = {
-  recipe: Recipe;
-};
+export const RecipePage = () => {
+  const { pathname } = useLocation();
+  const recipeId = pathname.slice(1);
 
-export const RecipeCard = ({
-  recipe,
-}: RecipeCardProps) => {
+  const dispatch = useAppDispatch();
+  const recipes = useAppSelector(state => state.recipes);
+  const savedRecipes = useAppSelector(state => state.savedRecipes);
+  const favoriteRecipes = useAppSelector(state => state.favoriteRecipes);
+
+  const [isCookingMode, setIsCookingMode] = useState(false);
+
+  const recipe = recipes.find(({ id }) => id === recipeId);
+
+  if (!recipe) {
+    return <h1>Recipe Not Found</h1>;
+  }
+
   const {
     id,
     title,
@@ -23,10 +33,6 @@ export const RecipeCard = ({
     instructions,
     imageUrl,
   } = recipe;
-
-  const dispatch = useAppDispatch();
-  const savedRecipes = useAppSelector(state => state.savedRecipes);
-  const favoriteRecipes = useAppSelector(state => state.favoriteRecipes);
 
   const isSaved = savedRecipes.some(recipe => recipe.id === id);
   const isFavorite = favoriteRecipes.some(recipe => recipe.id === id);
@@ -46,6 +52,10 @@ export const RecipeCard = ({
       dispatch(favoriteRecipesActions.add(recipe));
     }
   }
+
+  const handleStartCookingClick = () => {
+    setIsCookingMode(current => !current);
+  };
 
   return (
     <div className={styles.recipe}>
@@ -80,9 +90,20 @@ export const RecipeCard = ({
               Ingredients
             </p>
 
-            <p className={styles.info_text}>
-              {ingredients.join(', ')}
-            </p>
+            {isCookingMode
+              ? (
+                ingredients.map(ingredient => (
+                  <div>
+                    {ingredient}
+                  </div>
+                ))
+              )
+              : (
+                <p className={styles.info_text}>
+                  {ingredients.join(', ')}
+                </p>
+              )
+            }
           </div>
 
           <div className={styles.info_item}>
@@ -97,16 +118,6 @@ export const RecipeCard = ({
         </div>
 
         <div className={styles.actions}>
-          <Link
-            to={`/${id}`}
-            className={classNames(
-              styles.actions_button,
-              styles.actions_button_details
-            )}
-          >
-            Details
-          </Link>
-
           <button
             className={classNames(
               styles.actions_button,
@@ -126,6 +137,13 @@ export const RecipeCard = ({
             onClick={handleFavoritesClick}
           >
             {isFavorite ? 'Added to favorites' : 'Add to favorites'}
+          </button>
+
+          <button
+            className={styles.actions_button}
+            onClick={handleStartCookingClick}
+          >
+            Start Cooking
           </button>
         </div>
       </div>
