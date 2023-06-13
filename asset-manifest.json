@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/recipe-management-app/static/css/main.b33c3a3c.css",
-    "main.js": "/recipe-management-app/static/js/main.0b2331df.js",
+    "main.js": "/recipe-management-app/static/js/main.c5f11b0c.js",
     "static/media/icon-saved.svg": "/recipe-management-app/static/media/icon-saved.d979af69ce63c6b7a2db.svg",
     "index.html": "/recipe-management-app/index.html",
     "main.b33c3a3c.css.map": "/recipe-management-app/static/css/main.b33c3a3c.css.map",
-    "main.0b2331df.js.map": "/recipe-management-app/static/js/main.0b2331df.js.map"
+    "main.c5f11b0c.js.map": "/recipe-management-app/static/js/main.c5f11b0c.js.map"
   },
   "entrypoints": [
     "static/css/main.b33c3a3c.css",
-    "static/js/main.0b2331df.js"
+    "static/js/main.c5f11b0c.js"
   ]
 }
