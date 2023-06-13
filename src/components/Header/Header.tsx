@@ -15,7 +15,7 @@ export const Header = () => {
           </Link>
 
           <Link
-            to='saved'
+            to='/saved'
             className={styles.saved_button}
           />
         </div>
