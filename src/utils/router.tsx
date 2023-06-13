@@ -12,7 +12,7 @@ import { NotFoundPage } from '../pages/NotFoundPage';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<MainLayout />}>
+    <Route path="/recipe-management-app" element={<MainLayout />}>
       <Route index element={<HomePage />} />
       <Route path='saved' element={<SavedPage />} />
       <Route path=':recipeId' element={<RecipePage />} />
