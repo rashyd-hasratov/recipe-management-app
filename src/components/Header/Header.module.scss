@@ -1,0 +1,42 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+@import '../../styles/extends';
+
+.header {
+  background-color: $color-white;
+
+  &_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+}
+
+.logo {
+  font-size: $size-l;
+  font-weight: 700;
+}
+
+.saved_button {
+  position: relative;
+  width: $size-xl;
+
+  background-color: $color-white;
+
+  transition: background-color 0.2s linear;
+  
+  &:hover {
+    background-color: $color-gray-light;
+  }
+
+  &::before {
+    content: "";
+    @extend %absoluteCenterPosition;
+
+    width: 60%;
+    padding-bottom: 60%;
+
+    background-image: url('../../assets/icons/icon-saved.svg');
+    @extend %backgroundCenterCoverPosition;
+  }
+}

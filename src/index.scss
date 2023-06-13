@@ -1,0 +1,13 @@
+@import './styles/reset';
+@import './styles/variables';
+
+body {
+  min-height: 100vh;
+  font-family: sans-serif;
+  background-color: $color-gray-light;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
