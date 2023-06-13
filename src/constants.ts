@@ -1,0 +1,1 @@
+export const BASE_PATH = '/recipe-management-app';

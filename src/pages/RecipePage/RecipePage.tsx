@@ -10,7 +10,7 @@ import styles from './RecipePage.module.scss';
 
 export const RecipePage = () => {
   const { pathname } = useLocation();
-  const recipeId = pathname.slice(1);
+  const recipeId = pathname.split('/')[2];
 
   const dispatch = useAppDispatch();
   const recipes = useAppSelector(state => state.recipes);

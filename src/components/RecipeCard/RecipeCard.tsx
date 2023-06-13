@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
+import { BASE_PATH } from '../../constants';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { actions as savedRecipesActions } from '../../features/savedRecipes';
 import { actions as favoriteRecipesActions } from '../../features/favoriteRecipes';
@@ -98,7 +99,7 @@ export const RecipeCard = ({
 
         <div className={styles.actions}>
           <Link
-            to={`/${id}`}
+            to={`${BASE_PATH}/${id}`}
             className={classNames(
               styles.actions_button,
               styles.actions_button_details
